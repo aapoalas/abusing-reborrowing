@@ -1,1 +1,5 @@
-fn main() {}
+mod vec;
+
+fn main() {
+    vec::start();
+}
