@@ -1,8 +1,3 @@
-pub(crate) fn start() {
-    let mut vec = vec![0, 1, 2, 3, 4, 5];
-    act(&mut vec);
-}
-
 fn act<'a>(vec: &'a mut Vec<u32>) {                     // <--              + 'a lifetime
     let first_value = add(vec, rand::random());         // <-- + '1 starts  |
     println!("First value: {}", first_value);           //     | '1 ends    |
@@ -21,4 +16,9 @@ fn add(vec: &mut Vec<u32>, value: u32) -> &u32 {
 
 fn clean(vec: &mut Vec<u32>) {
     vec.retain(|_| rand::random::<bool>());
+}
+
+pub(crate) fn start() {
+    let mut vec = vec![0, 1, 2, 3, 4, 5];
+    act(&mut vec);
 }
