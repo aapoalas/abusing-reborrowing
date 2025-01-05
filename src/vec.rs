@@ -7,8 +7,11 @@ fn act(vec: &mut Vec<u32>) {
     let first_value = add(vec, rand::random());
     println!("First value: {}", first_value);
     let second_value = add(vec, rand::random());
+    // println!("First value: {}", first_value);
     println!("Second value: {}", second_value);
     clean(vec);
+    // println!("First value: {}", first_value);
+    // println!("Second value: {}", second_value);
 }
 
 fn add(vec: &mut Vec<u32>, value: u32) -> &u32 {
