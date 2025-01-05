@@ -1,3 +1,5 @@
+//! Taking indexes into vectors.
+
 fn act(vec: &mut Vec<u32>) {
     let first_index = add(vec, rand::random());         // <-- + '1 starts
     println!("First value: {}", vec[first_index]);      //     |
@@ -5,8 +7,8 @@ fn act(vec: &mut Vec<u32>) {
     println!("First value: {}", vec[first_index]);      //     |
     println!("Second value: {}", vec[second_index]);    //     |
     clean(vec);                                         //     - '1 & '2 end
-    println!("First value: {}", vec[first_index]);      //       ??
-    println!("Second value: {}", vec[second_index]);
+    println!("First value: {}", vec[first_index]);      //     ?
+    println!("Second value: {}", vec[second_index]);    //     ?
 }
 
 fn add(vec: &mut Vec<u32>, value: u32) -> usize {
