@@ -6,7 +6,7 @@ fn act(arena: &mut Arena) {
     let second = arena.add(rand::random());				// ==>	+ '2?
     // println!("First value: {}", vec[first]);			//		|
     // println!("Second value: {}", vec[second]);		//		|
-    arena.gc();										// <==	- '1, '2?
+    arena.gc();											// <==	- '1, '2?
     // println!("First value: {}", vec[first]);			// ?
     // println!("Second value: {}", vec[second]);		// ?
     // This line intentionally left blank.

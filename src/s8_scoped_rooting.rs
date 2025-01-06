@@ -8,7 +8,7 @@ fn act<'a, 'b>(
     );													// ==>	+ '1		|
     println!("First value: {}", arena[first]);			//		|			|
     let first = first.scope(arena, token.shared());		// <==	- '1		| &'b
-    arena.gc(token.reborrow());						//					| &'a mut
+    arena.gc(token.reborrow());							//					| &'a mut
     let first = first.get(arena, token.shared());		// ==>	+ '1		| &'a
     println!("First value: {}", arena[first]);			//		|			|
 }														// <==	- '1		- 'a, 'b
