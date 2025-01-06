@@ -6,7 +6,7 @@ fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
     println!("First value: {}", arena[first]);			//		|			|
     println!("Second value: {}", arena[second]);		//		|			|
-    arena.clean(token);									// <==	- '1, '2	| &'a mut
+    arena.gc(token);									// <==	- '1, '2	| &'a mut
     // println!("First value: {}", vec[first]);			//					|
     // println!("Second value: {}", vec[second]);		//					|
     // This line intentionally left blank.				//					|
@@ -24,7 +24,7 @@ impl Arena {
 	}
 
 	/// Clean the arena of unwanted values, requiring exclusive access to Token.
-	fn clean(&mut self, _: &mut Token) {
+	fn gc(&mut self, _: &mut Token) {
 	    self.0.retain(|_| rand::random::<bool>());
 	}
 }

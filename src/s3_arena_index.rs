@@ -6,7 +6,7 @@ fn act(arena: &mut Arena) {
     let second = arena.add(rand::random());				// ==>	+ '2?
     // println!("First value: {}", vec[first]);			//		|
     // println!("Second value: {}", vec[second]);		//		|
-    arena.clean();										// <==	- '1, '2?
+    arena.gc();										// <==	- '1, '2?
     // println!("First value: {}", vec[first]);			// ?
     // println!("Second value: {}", vec[second]);		// ?
     // This line intentionally left blank.
@@ -36,7 +36,7 @@ impl Arena {
 	    ArenaIndex(self.0.len() - 1, PhantomData)
 	}
 
-	fn clean(&mut self) {
+	fn gc(&mut self) {
 	    self.0.retain(|_| rand::random::<bool>());
 	}
 }

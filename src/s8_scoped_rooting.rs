@@ -8,7 +8,7 @@ fn act<'a, 'b>(
     );													// ==>	+ '1		|
     println!("First value: {}", arena[first]);			//		|			|
     let first = first.scope(arena, token.shared());		// <==	- '1		| &'b
-    arena.clean(token.reborrow());						//					| &'a mut
+    arena.gc(token.reborrow());						//					| &'a mut
     let first = first.get(arena, token.shared());		// ==>	+ '1		| &'a
     println!("First value: {}", arena[first]);			//		|			|
 }														// <==	- '1		- 'a, 'b
@@ -77,7 +77,7 @@ impl Arena {
     }
 
     /// Clean the arena of unwanted values, requiring exclusive access to Token.
-    fn clean(&mut self, _: ExclusiveToken) {
+    fn gc(&mut self, _: ExclusiveToken) {
         self.0.retain(|_| rand::random::<bool>());
     }
 }

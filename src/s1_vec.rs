@@ -6,7 +6,7 @@ fn act<'a>(vec: &'a mut Vec<u32>) {						// ==>				+ 'a
     let second = add(vec, rand::random());				// <=>	- '1, + '2	| &'a mut
     // println!("First value: {}", first);				//		|			|
     println!("Second value: {}", second);				//		|			|
-    clean(vec);											// <==	- '2		| &'a mut
+    gc(vec);											// <==	- '2		| &'a mut
     // println!("First value: {}", first);        		//					|
     // println!("Second value: {}", second);      		//					|
     // act_two(vec);									//					|
@@ -19,7 +19,7 @@ fn add(vec: &mut Vec<u32>, value: u32) -> &u32 {
 }
 
 /// Clean the vector of unwanted values.
-fn clean(vec: &mut Vec<u32>) {
+fn gc(vec: &mut Vec<u32>) {
     vec.retain(|_| rand::random::<bool>());
 }
 

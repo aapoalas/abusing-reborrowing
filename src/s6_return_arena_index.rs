@@ -8,7 +8,7 @@ fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
     );													// ==>	+ '3		|
     println!("Third value: {}", arena[third]);			//		|			|
     arena.add(rand::random(), token);					//		|			|
-    arena.clean(token);									// <==	- '3?		| &'a mut
+    arena.gc(token);									// <==	- '3?		| &'a mut
     // println!("Third value: {}", arena[third]);		// 					|
 }														// <==				-
 
@@ -35,7 +35,7 @@ fn act_two<'a>(
 	let second = second.bind(token);					// ==>	+ '2		|
     println!("First value: {}", arena[first]); 			//		|			|
     println!("Second value: {}", arena[second]);		//		|			|
-    arena.clean(token);									// <==	- '1, '2	|
+    arena.gc(token);									// <==	- '1, '2	|
     let third = arena.add(rand::random(), token);		// <==	  '3 == 'a	|
     third												//					|
 }														// <==				-
@@ -56,7 +56,7 @@ impl Arena {
     }
 
     /// Clean the arena of unwanted values, requiring exclusive access to Token.
-    fn clean(&mut self, _: &mut Token) {
+    fn gc(&mut self, _: &mut Token) {
         self.0.retain(|_| rand::random::<bool>());
     }
 }

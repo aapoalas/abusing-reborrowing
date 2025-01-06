@@ -21,7 +21,7 @@ fn act_two<'a>(
 ) {														// ==>				+ 'a
     println!("First value: {}", arena[first]); 			//					|
     println!("Second value: {}", arena[second]);		//					|
-    arena.clean(token);									// <==	- '1, '2?	x
+    arena.gc(token);									// <==	- '1, '2?	x
     println!("First value: {}", arena[first]); 			// ?				|
     println!("Second value: {}", arena[second]);		// ?				|
 }														// <==				-
@@ -62,7 +62,7 @@ impl Arena {
     }
 
     /// Clean the arena of unwanted values, requiring exclusive access to Token.
-    fn clean(&mut self, _: &mut Token) {
+    fn gc(&mut self, _: &mut Token) {
         self.0.retain(|_| rand::random::<bool>());
     }
 }
