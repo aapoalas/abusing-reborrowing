@@ -7,8 +7,8 @@ fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
     println!("First value: {}", arena[first]);			//		|			|
     println!("Second value: {}", arena[second]);		//		|			|
     arena.gc(token);									// <==	- '1, '2	| &'a mut
-    // println!("First value: {}", vec[first]);			//					|
-    // println!("Second value: {}", vec[second]);		//					|
+    // println!("First value: {}", arena[first]);		//					|
+    // println!("Second value: {}", arena[second]);		//					|
     // This line intentionally left blank.				//					|
 }														// <==				-
 

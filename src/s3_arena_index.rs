@@ -2,13 +2,13 @@
 
 fn act(arena: &mut Arena) {
     let first = arena.add(rand::random());				// ==>	+ '1
-    // println!("First value: {}", vec[first]);			//		|
+    // println!("First value: {}", arena[first]);		//		|
     let second = arena.add(rand::random());				// ==>	+ '2?
-    // println!("First value: {}", vec[first]);			//		|
-    // println!("Second value: {}", vec[second]);		//		|
+    // println!("First value: {}", arena[first]);		//		|
+    // println!("Second value: {}", arena[second]);		//		|
     arena.gc();											// <==	- '1, '2?
-    // println!("First value: {}", vec[first]);			// ?
-    // println!("Second value: {}", vec[second]);		// ?
+    // println!("First value: {}", arena[first]);		// ?
+    // println!("Second value: {}", arena[second]);		// ?
     // This line intentionally left blank.
 }
 
