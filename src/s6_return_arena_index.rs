@@ -12,12 +12,12 @@ fn act<'a>(
     arena.add(rand::random(), token);					//		|			|
     arena.gc(token);									// <==	- '3?		| &'a mut
     // println!("Third value: {}", arena[third]);		// 					|
-    // These lines intentionally left blank.			//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
 }														// <==				-
 
 
@@ -52,7 +52,8 @@ fn act_two<'a>(
 /// Arena.
 struct Token();
 
-#[derive(Clone)]
+/// Garbage collected heap arena.
+#[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
 impl Arena {

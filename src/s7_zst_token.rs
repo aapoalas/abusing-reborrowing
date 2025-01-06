@@ -88,7 +88,8 @@ impl SharedToken<'_> {
 	}
 }
 
-#[derive(Clone)]
+/// Garbage collected heap arena.
+#[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
 impl Arena {

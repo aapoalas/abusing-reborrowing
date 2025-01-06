@@ -7,17 +7,17 @@ fn act<'a>(
     println!("First value: {}", arena[first]); 			//		|			|
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
     // act_two(arena, first, second, token);			// <==	- '1, '2	| &'a mut
-    // These lines intentionally left blank.			//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
 }														// <==				-
 
 /// Take two
@@ -58,7 +58,8 @@ impl ArenaIndex<'_> {
 /// Arena.
 struct Token();
 
-#[derive(Clone)]
+/// Garbage collected heap arena.
+#[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
 impl Arena {

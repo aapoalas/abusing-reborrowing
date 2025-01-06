@@ -11,13 +11,13 @@ fn act<'a>(
     arena.gc(token);									// <==	- '1, '2	| &'a mut
     // println!("First value: {}", arena[first]);		//					|
     // println!("Second value: {}", arena[second]);		//					|
-    // These lines intentionally left blank.			//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
 }														// <==				-
 
 /// Marker ZST, exclusive access to the Token is required to clean the Arena.
@@ -56,7 +56,8 @@ pub(crate) fn start() {
     act(&mut vec, &mut token);
 }
 
-#[derive(Clone)]
+/// Garbage collected heap arena.
+#[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
 /// Index into Arena with a lifetime.

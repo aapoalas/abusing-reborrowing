@@ -11,13 +11,13 @@ fn act<'a, 'b>(
     arena.gc(token.reborrow());							//					| &'a mut
     let first = first.get(arena, token.shared());		// ==>	+ '1		| &'a
     println!("First value: {}", arena[first]);			//		|			|
-    // These lines intentionally left blank.			//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
-    //													//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
+														//					|
 }														// <==	- '1		- 'a, 'b
 
 /// Exclusive access marker, required to clean the Arena.
@@ -72,7 +72,8 @@ impl<'a> SharedToken<'_, 'a> {
 	}
 }
 
-#[derive(Clone)]
+/// Garbage collected heap arena.
+#[derive(Debug, Clone)]
 struct Arena(Vec<u32>, Vec<u32>);
 
 impl Arena {

@@ -11,17 +11,17 @@ fn act(
     arena.gc();											// <==	- '1, '2?
     // println!("First value: {}", arena[first]);		// ?
     // println!("Second value: {}", arena[second]);		// ?
-    // These lines intentionally left blank.
-    //
-    //
-    //
-    //
-    //
-    //
+
+
+
+
+
+
+
 }
 
-/// Newtype wrapper around u32 data stored in a vector.
-#[derive(Clone)]
+/// Garbage collected heap arena.
+#[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
 /// Index into Arena with a lifetime.
