@@ -31,11 +31,6 @@ impl Arena {
 	fn gc(&mut self) {
 	    self.0.retain(|_| rand::random::<bool>());
 	}
-
-	/// Get a reference to a value in the Arena.
-	fn get(&self, index: usize) -> &u32 {
-		self.0.first().unwrap()
-	}
 }
 
 
@@ -53,7 +48,7 @@ impl Arena {
 fn act_two(arena: &mut Arena) {
 	// Act 2 preparation
     arena.add(rand::random());
-    let first = arena.get(0);
+    let first = &arena[0];
     // Act 3 finale
     println!("&'a mut Arena: {:?}; &'a u32: {}", arena, first);
     arena.add(rand::random());
@@ -67,7 +62,7 @@ fn act_two(arena: &mut Arena) {
 fn act_three(arena: &mut Arena) {
 	// Act 3 preparation
     arena.add(rand::random());
-    let first = arena.get(0);
+    let first = &arena[0];
     // Act 3 finale
     // act_three_finale(arena, first);
 }
@@ -103,3 +98,14 @@ pub(crate) fn start() {
 /// Garbage collected heap arena.
 #[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
+
+/// Make it possible to use indexing.
+impl Index<usize> for Arena {
+    type Output = u32;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        self.0.index(index)
+    }
+}
+
+use std::ops::Index;

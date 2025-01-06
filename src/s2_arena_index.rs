@@ -1,16 +1,16 @@
-//! Taking indexes into vectors.
+//! Taking indexes from Arena.
 
 fn act(
 	arena: &mut Arena
 ) {
     let first = arena.add(rand::random());				// ==>	+ '1
-    println!("First value: {}", arena.get(first));		//		|
+    println!("First value: {}", arena[first]);			//		|
     let second = arena.add(rand::random());				// ==>	+ '2
-    println!("First value: {}", arena.get(first));		//		|
-    println!("Second value: {}", arena.get(second));	//		|
+    println!("First value: {}", arena[first]);			//		|
+    println!("Second value: {}", arena[second]);		//		|
     arena.gc();											// <==	- '1, '2
-    println!("First value: {}", arena.get(first));		// ?
-    println!("Second value: {}", arena.get(second));	// ?
+    println!("First value: {}", arena[first]);			// ?
+    println!("Second value: {}", arena[second]);		// ?
 
 
 
@@ -44,11 +44,15 @@ impl Arena {
 	fn gc(&mut self) {
 	    self.0.retain(|_| rand::random::<bool>());
 	}
+}
 
-	/// Get a reference to a value in the Arena.
-	fn get(&self, idx: usize) -> &u32 {
-		&self.0[idx]
-	}
+/// Make it possible to use indexing.
+impl Index<usize> for Arena {
+    type Output = u32;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        self.0.index(index)
+    }
 }
 
 pub(crate) fn start() {
@@ -59,3 +63,5 @@ pub(crate) fn start() {
 /// Garbage collected heap arena.
 #[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
+
+use std::ops::Index;

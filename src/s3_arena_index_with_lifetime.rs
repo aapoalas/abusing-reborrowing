@@ -1,4 +1,4 @@
-//! Index newtype into arena.
+//! Borrowing index newtypes from arena.
 
 fn act(
 	arena: &mut Arena
