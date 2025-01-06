@@ -2,7 +2,6 @@
 
 #[allow(clippy::needless_lifetimes)]
 fn act<'a>(vec: &'a mut Vec<u32>) {                     // <--              + 'a lifetime
-    use_mut_and_ref_together(vec);                      //                  |
     let first_value = add(vec, rand::random());         // <-- + '1 starts  |
     println!("First value: {}", first_value);           //     | '1 ends    |
     let second_value = add(vec, rand::random());        // <-- / '2 starts  |
@@ -11,6 +10,7 @@ fn act<'a>(vec: &'a mut Vec<u32>) {                     // <--              + 'a
     clean(vec);                                         // <-- - '2 ends    |
     // println!("First value: {}", first_value);        //                  |
     // println!("Second value: {}", second_value);      //                  |
+    // use_mut_and_ref_together(vec);                   //                  |
 }                                                       // <--              -
 
 fn add(vec: &mut Vec<u32>, value: u32) -> &u32 {
@@ -22,6 +22,7 @@ fn clean(vec: &mut Vec<u32>) {
     vec.retain(|_| rand::random::<bool>());
 }
 
+#[allow(unused)]
 fn use_mut_and_ref_together(vec: &mut Vec<u32>) {
     add(vec, rand::random());
     let first_value = vec.first().unwrap();
@@ -30,6 +31,7 @@ fn use_mut_and_ref_together(vec: &mut Vec<u32>) {
     use_mut_and_ref_together_interprocedurally(vec);
 }
 
+#[allow(unused)]
 fn use_mut_and_ref_together_interprocedurally(vec: &mut Vec<u32>) {
     add(vec, rand::random());
     #[allow(unused)]
