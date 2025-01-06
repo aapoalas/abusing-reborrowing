@@ -1,18 +1,18 @@
 //! Taking indexes into vectors.
 
-// #[allow(empty_line_for_viewing_pleasure)]
 fn act(vec: &mut Vec<u32>) {
-    let first_index = add(vec, rand::random());			// <-- 	+ '1
-    println!("First value: {}", vec[first_index]);		//		|
-    let second_index = add(vec, rand::random());		// <-- 	+ '2
-    println!("First value: {}", vec[first_index]);		//		|
-    println!("Second value: {}", vec[second_index]);	//		|
-    clean(vec);											//		- '1, '2
-    println!("First value: {}", vec[first_index]);		//		?
-    println!("Second value: {}", vec[second_index]);	//		?
+    let first = add(vec, rand::random());				// ==>	+ '1
+    println!("First value: {}", vec[first]);			//		|
+    let second = add(vec, rand::random());				// ==>	+ '2
+    println!("First value: {}", vec[first]);			//		|
+    println!("Second value: {}", vec[second]);			//		|
+    clean(vec);											// <==	- '1, '2
+    println!("First value: {}", vec[first]);			// ?
+    println!("Second value: {}", vec[second]);			// ?
+    // This line intentionally left blank.
 }
 
-/// Add a value to vector and return its index.
+/// Add value to vector and return its index.
 fn add(vec: &mut Vec<u32>, value: u32) -> usize {
     vec.push(value);
     vec.len() - 1
