@@ -1,4 +1,4 @@
-//! Index newtype into arena with separate marker lifetime.
+//! Borrowing index newtypes with separate marker lifetime.
 
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token
@@ -24,7 +24,7 @@ fn act<'a>(
 struct Token();
 
 impl Arena {
-	/// Add a value to arena and return its index as VecIndex, bound to a shared
+	/// Add a value to arena and return its index as ArenaIndex, bound to a shared
 	/// borrow of Token.
 	fn add<'a>(&mut self, value: u32, _: &'a Token) -> ArenaIndex<'a> {
 	    self.0.push(value);
@@ -51,9 +51,9 @@ impl Arena {
 
 
 pub(crate) fn start() {
-    let mut vec = Arena(vec![0, 1, 2, 3, 4, 5]);
+    let mut arena = Arena(vec![0, 1, 2, 3, 4, 5]);
     let mut token = Token();
-    act(&mut vec, &mut token);
+    act(&mut arena, &mut token);
 }
 
 /// Garbage collected heap arena.

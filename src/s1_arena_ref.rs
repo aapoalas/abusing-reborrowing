@@ -11,7 +11,7 @@ fn act<'a>(
     arena.gc();											// <==	- '2		| &'a mut
     // println!("First value: {}", first);        		//					|
     // println!("Second value: {}", second);      		//					|
-    // act_two(vec);									//					|
+    // act_two(arena);									//					|
 														//					|
 														//					|
 														//					|
@@ -91,8 +91,8 @@ fn act_three_finale(arena: &mut Arena, first: &u32) {
 
 
 pub(crate) fn start() {
-    let mut vec = Arena(vec![0, 1, 2, 3, 4, 5]);
-    act(&mut vec);
+    let mut arena = Arena(vec![0, 1, 2, 3, 4, 5]);
+    act(&mut arena);
 }
 
 /// Garbage collected heap arena.

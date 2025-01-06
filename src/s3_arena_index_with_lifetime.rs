@@ -38,7 +38,7 @@ impl Index<ArenaIndex<'_>> for Arena {
 }
 
 impl Arena {
-	/// Add a value to vector and return its index as VecIndex.
+	/// Add a value to arena and return its index as ArenaIndex.
 	fn add(&mut self, value: u32) -> ArenaIndex {
 	    self.0.push(value);
 	    ArenaIndex(self.0.len() - 1, PhantomData)

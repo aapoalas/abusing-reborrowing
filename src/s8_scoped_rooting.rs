@@ -77,7 +77,7 @@ impl<'a> SharedToken<'_, 'a> {
 struct Arena(Vec<u32>, Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its index as VecIndex, bound to a shared
+    /// Add a value to arena and return its index as ArenaIndex, bound to a shared
     /// borrow of Token.
     fn add<'a>(&mut self, value: u32, _: SharedToken<'a, '_>) -> ArenaIndex<'a> {
         self.0.push(value);

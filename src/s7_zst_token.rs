@@ -93,7 +93,7 @@ impl SharedToken<'_> {
 struct Arena(Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its index as VecIndex, bound to a shared
+    /// Add a value to arena and return its index as ArenaIndex, bound to a shared
     /// borrow of Token.
     fn add<'a>(&mut self, value: u32, _: SharedToken<'a>) -> ArenaIndex<'a> {
         self.0.push(value);
@@ -107,10 +107,10 @@ impl Arena {
 }
 
 pub(crate) fn start() {
-    let mut vec = Arena(vec![0, 1, 2, 3, 4, 5]);
+    let mut arena = Arena(vec![0, 1, 2, 3, 4, 5]);
     // SAFETY: We have exclusive access to Arena.
     let mut token = unsafe { ExclusiveToken::create() };
-    act(&mut vec, token);
+    act(&mut arena, token);
 }
 
 #[derive(Clone, Copy)]
