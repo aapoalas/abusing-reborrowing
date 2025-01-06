@@ -1,6 +1,8 @@
 //! Returning index newtype from methods.
 
-fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
+fn act<'a>(
+	arena: &mut Arena, token: &'a mut Token
+) {														// ==>				+ 'a
     let first = arena.add(rand::random(), token); 		// ==>	+ '1		|
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
     let third = act_two(								//		|			|
@@ -10,6 +12,12 @@ fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
     arena.add(rand::random(), token);					//		|			|
     arena.gc(token);									// <==	- '3?		| &'a mut
     // println!("Third value: {}", arena[third]);		// 					|
+    // These lines intentionally left blank.			//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
 }														// <==				-
 
 

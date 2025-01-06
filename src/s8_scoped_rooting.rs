@@ -11,6 +11,13 @@ fn act<'a, 'b>(
     arena.gc(token.reborrow());							//					| &'a mut
     let first = first.get(arena, token.shared());		// ==>	+ '1		| &'a
     println!("First value: {}", arena[first]);			//		|			|
+    // These lines intentionally left blank.			//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
 }														// <==	- '1		- 'a, 'b
 
 /// Exclusive access marker, required to clean the Arena.

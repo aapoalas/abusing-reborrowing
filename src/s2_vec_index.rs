@@ -1,6 +1,8 @@
 //! Taking indexes into vectors.
 
-fn act(vec: &mut Vec<u32>) {
+fn act(
+	vec: &mut Vec<u32>
+) {
     let first = add(vec, rand::random());				// ==>	+ '1
     println!("First value: {}", vec[first]);			//		|
     let second = add(vec, rand::random());				// ==>	+ '2
@@ -9,7 +11,13 @@ fn act(vec: &mut Vec<u32>) {
     gc(vec);											// <==	- '1, '2
     println!("First value: {}", vec[first]);			// ?
     println!("Second value: {}", vec[second]);			// ?
-    // This line intentionally left blank.
+    // These lines intentionally left blank.
+    //
+    //
+    //
+    //
+    //
+    //
 }
 
 /// Add value to vector and return its index.

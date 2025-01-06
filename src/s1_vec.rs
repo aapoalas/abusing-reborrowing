@@ -1,6 +1,8 @@
 //! Borrowing values through vectors.
 
-fn act<'a>(vec: &'a mut Vec<u32>) {						// ==>				+ 'a
+fn act<'a>(
+	vec: &'a mut Vec<u32>
+) {														// ==>				+ 'a
     let first = add(vec, rand::random());				// ==>	+ '1		| &'a mut
     println!("First value: {}", first);					//		|			|
     let second = add(vec, rand::random());				// <=>	- '1, + '2	| &'a mut
@@ -10,6 +12,12 @@ fn act<'a>(vec: &'a mut Vec<u32>) {						// ==>				+ 'a
     // println!("First value: {}", first);        		//					|
     // println!("Second value: {}", second);      		//					|
     // act_two(vec);									//					|
+    // These lines intentionally left blank.			//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
 }														// <==				-
 
 /// Add value to vector and return a reference to it.

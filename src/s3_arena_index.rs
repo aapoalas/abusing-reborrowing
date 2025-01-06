@@ -1,6 +1,8 @@
 //! Index newtype into arena.
 
-fn act(arena: &mut Arena) {
+fn act(
+	arena: &mut Arena
+) {
     let first = arena.add(rand::random());				// ==>	+ '1
     // println!("First value: {}", arena[first]);		//		|
     let second = arena.add(rand::random());				// ==>	+ '2?
@@ -9,7 +11,13 @@ fn act(arena: &mut Arena) {
     arena.gc();											// <==	- '1, '2?
     // println!("First value: {}", arena[first]);		// ?
     // println!("Second value: {}", arena[second]);		// ?
-    // This line intentionally left blank.
+    // These lines intentionally left blank.
+    //
+    //
+    //
+    //
+    //
+    //
 }
 
 /// Newtype wrapper around u32 data stored in a vector.

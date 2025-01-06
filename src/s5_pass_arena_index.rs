@@ -1,11 +1,19 @@
 //! Passing index newtypes into methods.
 
-fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
+fn act<'a>(
+	arena: &mut Arena, token: &'a mut Token
+) {														// ==>				+ 'a
     let first = arena.add(rand::random(), token); 		// ==>	+ '1		|
     println!("First value: {}", arena[first]); 			//		|			|
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
     // act_two(arena, first, second, token);			// <==	- '1, '2	| &'a mut
-    // These line intentionally left blank.				//					|
+    // These lines intentionally left blank.			//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
     //													//					|
     //													//					|
     //													//					|

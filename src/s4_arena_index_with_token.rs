@@ -1,6 +1,8 @@
 //! Index newtype into arena with separate marker lifetime.
 
-fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
+fn act<'a>(
+	arena: &mut Arena, token: &'a mut Token
+) {														// ==>				+ 'a
     let first = arena.add(rand::random(), token);		// ==>	+ '1		|
     println!("First value: {}", arena[first]);			//		|			|
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
@@ -9,7 +11,13 @@ fn act<'a>(arena: &mut Arena, token: &'a mut Token) {	// ==>				+ 'a
     arena.gc(token);									// <==	- '1, '2	| &'a mut
     // println!("First value: {}", arena[first]);		//					|
     // println!("Second value: {}", arena[second]);		//					|
-    // This line intentionally left blank.				//					|
+    // These lines intentionally left blank.			//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
+    //													//					|
 }														// <==				-
 
 /// Marker ZST, exclusive access to the Token is required to clean the Arena.
