@@ -93,8 +93,8 @@ impl SharedToken<'_> {
 struct Arena(Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its index as ArenaRef, bound to a shared
-    /// borrow of Token.
+    /// Add a value to arena and return its reference as ArenaRef, bound to a
+    /// SharedToken's lifetime.
     fn add<'a>(&mut self, value: u32, _: SharedToken<'a>) -> ArenaRef<'a> {
         self.0.push(value);
         ArenaRef(self.0.len() - 1, PhantomData)

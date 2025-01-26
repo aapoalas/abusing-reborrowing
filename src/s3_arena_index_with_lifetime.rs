@@ -1,4 +1,4 @@
-//! Borrowing index newtypes from arena.
+//! Borrowing ref newtypes from arena.
 
 fn act(
 	arena: &mut Arena
@@ -24,7 +24,7 @@ fn act(
 #[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
-/// Index into Arena with a lifetime.
+/// Reference into Arena-allocated u32 with a lifetime.
 #[derive(Clone, Copy)]
 struct ArenaRef<'a>(usize, PhantomData<&'a u32>);
 
@@ -38,7 +38,7 @@ impl Index<ArenaRef<'_>> for Arena {
 }
 
 impl Arena {
-	/// Add a value to arena and return its index as ArenaRef.
+	/// Add a value to arena and return its reference as ArenaRef.
 	fn add(&mut self, value: u32) -> ArenaRef {
 	    self.0.push(value);
 	    ArenaRef(self.0.len() - 1, PhantomData)

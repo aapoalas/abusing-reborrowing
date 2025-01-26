@@ -1,4 +1,4 @@
-//! Scoped rooting of newtype indexes during Arena cleaning.
+//! Scoped rooting of newtype refs during Arena cleaning.
 
 fn act<'a, 'b>(
 	arena: &mut Arena, mut token: ExclusiveToken<'a, 'b>
@@ -33,7 +33,8 @@ impl<'a, 'b> ExclusiveToken<'a, 'b> {
 	/// ### Safety
 	///
 	/// The caller must have exclusive access to Arena. The Arena is not taken as
-	/// a parameter because we do not want to keep the borrow lifetime.
+	/// a parameter because we do not want to keep the borrow lifetime. Only one
+	/// ExclusiveToken must ever be created manually.
 	unsafe fn create() -> Self {
 		Self(Default::default(), Default::default())
 	}

@@ -1,4 +1,4 @@
-//! Taking indexes from Arena.
+//! Taking untypes usizes from Arena.
 
 fn act(
 	arena: &mut Arena

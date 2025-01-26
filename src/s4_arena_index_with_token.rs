@@ -1,4 +1,4 @@
-//! Borrowing index newtypes with separate marker lifetime.
+//! Borrowing ref newtypes with separate marker lifetime.
 
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token
@@ -24,8 +24,8 @@ fn act<'a>(
 struct Token();
 
 impl Arena {
-	/// Add a value to arena and return its index as ArenaRef, bound to a shared
-	/// borrow of Token.
+	/// Add a value to arena and return its references as ArenaRef, bound to a
+	/// shared borrow of Token.
 	fn add<'a>(&mut self, value: u32, _: &'a Token) -> ArenaRef<'a> {
 	    self.0.push(value);
 	    ArenaRef(self.0.len() - 1, PhantomData)
@@ -60,7 +60,7 @@ pub(crate) fn start() {
 #[derive(Debug, Clone)]
 struct Arena(Vec<u32>);
 
-/// Index into Arena with a lifetime.
+/// Reference into Arena-allocated u32 with a lifetime.
 #[derive(Clone, Copy)]
 struct ArenaRef<'a>(usize, PhantomData<&'a u32>);
 

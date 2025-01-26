@@ -1,4 +1,4 @@
-//! Returning index newtype from methods.
+//! Returning ref newtype from methods.
 
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token
@@ -58,7 +58,8 @@ struct Token();
 struct Arena(Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its index as ArenaRef, bound to a shared
+    /// Add a value to arena and return its reference as ArenaRef, bound to a
+    /// shared
     /// borrow of Token.
     fn add<'a>(&mut self, value: u32, _: &'a Token) -> ArenaRef<'a> {
         self.0.push(value);
