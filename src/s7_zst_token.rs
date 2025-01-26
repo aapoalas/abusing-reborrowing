@@ -22,10 +22,10 @@ fn act<'a>(
 
 fn act_two<'a>(
 	arena: &mut Arena,
-	first: ArenaIndex,
-	second: ArenaIndex,
+	first: ArenaRef,
+	second: ArenaRef,
 	mut token: ExclusiveToken<'a>
-) -> ArenaIndex<'a> {									// ==>				+ 'a
+) -> ArenaRef<'a> {										// ==>				+ 'a
 	let first = first.bind(token.shared());				// ==>	+ '1		|
 	let second = second.bind(token.shared());			// ==>	+ '2		|
     println!("First value: {}", arena[first]); 			//		|			|
@@ -93,11 +93,11 @@ impl SharedToken<'_> {
 struct Arena(Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its index as ArenaIndex, bound to a shared
+    /// Add a value to arena and return its index as ArenaRef, bound to a shared
     /// borrow of Token.
-    fn add<'a>(&mut self, value: u32, _: SharedToken<'a>) -> ArenaIndex<'a> {
+    fn add<'a>(&mut self, value: u32, _: SharedToken<'a>) -> ArenaRef<'a> {
         self.0.push(value);
-        ArenaIndex(self.0.len() - 1, PhantomData)
+        ArenaRef(self.0.len() - 1, PhantomData)
     }
 
     /// Clean the arena of unwanted values, requiring exclusive access to Token.
@@ -114,24 +114,24 @@ pub(crate) fn start() {
 }
 
 #[derive(Clone, Copy)]
-struct ArenaIndex<'a>(usize, PhantomData<&'a u32>);
+struct ArenaRef<'a>(usize, PhantomData<&'a u32>);
 
-impl ArenaIndex<'_> {
-	/// Bind the ArenaIndex to shared a Token borrow.
-    fn bind<'a>(self, _: SharedToken<'a>) -> ArenaIndex<'a> {
-        unsafe { std::mem::transmute::<ArenaIndex, ArenaIndex<'a>>(self) }
+impl ArenaRef<'_> {
+	/// Bind the ArenaRef to shared a Token borrow.
+    fn bind<'a>(self, _: SharedToken<'a>) -> ArenaRef<'a> {
+        unsafe { std::mem::transmute::<ArenaRef, ArenaRef<'a>>(self) }
     }
 
 	/// Forcibly release the borrow on Token.
-    fn unbind(self) -> ArenaIndex<'static> {
-        unsafe { std::mem::transmute::<ArenaIndex, ArenaIndex<'static>>(self) }
+    fn unbind(self) -> ArenaRef<'static> {
+        unsafe { std::mem::transmute::<ArenaRef, ArenaRef<'static>>(self) }
     }
 }
 
-impl Index<ArenaIndex<'_>> for Arena {
+impl Index<ArenaRef<'_>> for Arena {
     type Output = u32;
 
-    fn index(&self, index: ArenaIndex<'_>) -> &Self::Output {
+    fn index(&self, index: ArenaRef<'_>) -> &Self::Output {
         self.0.index(index.0)
     }
 }
