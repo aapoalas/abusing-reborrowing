@@ -6,7 +6,7 @@ fn act<'a>(
     let first = arena.add(rand::random(), token); 		// ==>	+ '1		|
     println!("First value: {}", arena[first]); 			//		|			|
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
-    act_two(arena, first.unbind(), second.unbind(), token);			// <==	- '1, '2	| &'a mut
+    // act_two(arena, first, second, token);			// <==	- '1, '2	| &'a mut
 														//					|
 														//					|
 														//					|
@@ -30,7 +30,7 @@ fn act_two<'a>(
     println!("First value: {}", arena[first]); 			//					|
     println!("Second value: {}", arena[second]);		//					|
     arena.gc(token);									// <==	- '1, '2?	x
-    // println!("First value: {}", arena[first]); 			// ?				|
+    // println!("First value: {}", arena[first]); 		// ?				|
     // println!("Second value: {}", arena[second]);		// ?				|
 }														// <==				-
 
