@@ -7,10 +7,9 @@ fn act<'a>(
     let second = arena.add(rand::random(), token);		// ==>	+ '2		|
     let third = act_two(								//		|			|
         arena, first.unbind(), second.unbind(), token	// <==	- '1, '2	| &'a mut
-    ).unbind().bind(token);													// ==>	+ '3		|
+    );													// ==>	+ '3		|
     println!("Third value: {}", arena[third]);			//		|			|
     arena.add(rand::random(), token);					//		|			|
-    println!("Third value: {}", arena[third]);		// 					|
     arena.gc(token);									// <==	- '3?		| &'a mut
     // println!("Third value: {}", arena[third]);		// 					|
 														//					|
