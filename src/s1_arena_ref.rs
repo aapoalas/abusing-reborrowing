@@ -1,4 +1,6 @@
-//! Borrowing values from Arena.
+//! Step 1. Borrow values from an Arena
+//!
+//! Not really a garbage collector, is it?
 
 fn act<'a>(
 	arena: &'a mut Arena

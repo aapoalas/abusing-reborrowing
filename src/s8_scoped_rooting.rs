@@ -1,4 +1,6 @@
-//! Scoped rooting of newtype refs during Arena cleaning.
+//! Step 8. Scoped rooting of ArenaRefs to retain data over GC safepoints
+//!
+//! Well now we've got it!
 
 fn act<'a, 'b>(
 	arena: &mut Arena, mut token: ExclusiveToken<'a, 'b>

@@ -1,4 +1,6 @@
-//! Replacing Token reference with a ZST.
+//! Step 7. Replacing Token reference with a ZST
+//!
+//! It doesn't make much sense to pass around an unused reference, now does it?
 
 fn act<'a>(
 	arena: &mut Arena, mut token: ExclusiveToken<'a>

@@ -1,4 +1,6 @@
-//! Passing ref newtypes into methods.
+//! Step 5. Passing ArenaRefs as parameters.
+//!
+//! I like parameters, okay?
 
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token

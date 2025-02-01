@@ -1,4 +1,6 @@
-//! Taking untypes usizes from Arena.
+//! Step 2. Taking usize values from Arena
+//!
+//! Seems a tad error prone, doesn't it?
 
 fn act(
 	arena: &mut Arena

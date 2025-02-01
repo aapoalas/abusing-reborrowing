@@ -1,4 +1,6 @@
-//! Borrowing ref newtypes with separate marker lifetime.
+//! Step 4. Borrowing ArenaRefs with a separate marker lifetime
+//!
+//! Hey, this seems like it might work!
 
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token

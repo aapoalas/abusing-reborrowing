@@ -1,4 +1,6 @@
-//! Returning ref newtype from methods.
+//! 6. Returning ArenaRefs from methods
+//!
+//! Sometimes I do want to get a result as well!
 
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token

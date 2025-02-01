@@ -1,4 +1,6 @@
-//! Borrowing ref newtypes from arena.
+//! Step 3. Borrowing ArenaRef newtypes from Arena
+//!
+//! Maybe this will help?
 
 fn act(
 	arena: &mut Arena
