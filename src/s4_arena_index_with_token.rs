@@ -5,9 +5,9 @@
 fn act<'a>(
 	arena: &mut Arena, token: &'a mut Token
 ) {														// ==>				+ 'a
-    let first = arena.add(rand::random(), token);		// ==>	+ '1		|
+    let first = arena.get(token);						// ==>	+ '1		|
     println!("First value: {}", arena[first]);			//		|			|
-    let second = arena.add(rand::random(), token);		// ==>	+ '2		|
+    let second = arena.get(token);						// ==>	+ '2		|
     println!("First value: {}", arena[first]);			//		|			|
     println!("Second value: {}", arena[second]);		//		|			|
     arena.gc(token);									// <==	- '1, '2	| &'a mut
@@ -26,10 +26,9 @@ fn act<'a>(
 struct Token();
 
 impl Arena {
-	/// Add a value to arena and return its references as ArenaRef, bound to a
-	/// shared borrow of Token.
-	fn add<'a>(&mut self, value: u32, _: &'a Token) -> ArenaRef<'a> {
-	    self.0.push(value);
+	/// Get an ArenaRef, bound to a shared borrow of Token.
+	fn get<'a>(&mut self, _: &'a Token) -> ArenaRef<'a> {
+	    self.0.push(rand::random());
 	    ArenaRef(self.0.len() - 1, PhantomData)
 	}
 

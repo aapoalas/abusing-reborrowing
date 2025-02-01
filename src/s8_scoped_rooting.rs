@@ -5,8 +5,8 @@
 fn act<'a, 'b>(
 	arena: &mut Arena, mut token: ExclusiveToken<'a, 'b>
 ) {														// ==>				+ 'a, 'b
-    let first = arena.add(								//					|
-    	rand::random(), token.shared()					//					|
+    let first = arena.get(								//					|
+    	token.shared()									//					|
     );													// ==>	+ '1		|
     println!("First value: {}", arena[first]);			//		|			|
     let first = first.scope(arena, token.shared());		// <==	- '1		| &'b
@@ -80,10 +80,9 @@ impl<'a> SharedToken<'_, 'a> {
 struct Arena(Vec<u32>, Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its reference as ArenaRef, bound to a
-    /// SharedToken's GC lifetime.
-    fn add<'a>(&mut self, value: u32, _: SharedToken<'a, '_>) -> ArenaRef<'a> {
-        self.0.push(value);
+    /// Get an ArenaRef, bound to a SharedToken's GC lifetime.
+    fn get<'a>(&mut self, _: SharedToken<'a, '_>) -> ArenaRef<'a> {
+        self.0.push(rand::random());
         ArenaRef(self.0.len() - 1, PhantomData)
     }
 
@@ -132,7 +131,8 @@ struct ScopedArenaRef<'a>(usize, PhantomData<&'a u32>);
 
 impl ScopedArenaRef<'_> {
 	fn get<'a>(self, arena: &mut Arena, token: SharedToken<'a, '_>) -> ArenaRef<'a> {
-		arena.add(*arena.1.index(self.0), token)
+		arena.0.push(*arena.1.index(self.0));
+		ArenaRef(arena.0.len() - 1, Default::default())
 	}
 }
 

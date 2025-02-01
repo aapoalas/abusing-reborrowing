@@ -5,18 +5,18 @@
 fn act<'a>(
 	arena: &mut Arena, mut token: ExclusiveToken<'a>
 ) {														// ==>				+ 'a
-    let first = arena.add(								//					|
-    	rand::random(), token.shared()					//					|
+    let first = arena.get(								//					|
+    	token.shared()									//					|
     );													// ==>	+ '1		|
-    let second = arena.add(								//		|			|
-    	rand::random(), token.shared()					//		|			|
+    let second = arena.get(								//		|			|
+    	token.shared()									//		|			|
     );													// ==>	+ '2		|
     let third = act_two(								//		|			|
         arena, first.unbind(), second.unbind(),			//		|			|
         token.reborrow()								// <==	- '1, '2	| &'a mut
     ).unbind().bind(token.shared());					// ==>	+ '3		|
     println!("Third value: {}", arena[third]);			//		|			|
-    arena.add(rand::random(), token.shared());			//		|			|
+    arena.get(token.shared());							//		|			|
     println!("Third value: {}", arena[third]);			// 		|			|
     arena.gc(token);									// <==	- '3		| &'a mut
     // println!("Third value: {}", arena[third]);		// 					|
@@ -32,9 +32,9 @@ fn act_two<'a>(
 	let second = second.bind(token.shared());			// ==>	+ '2		|
     println!("First value: {}", arena[first]); 			//		|			|
     println!("Second value: {}", arena[second]);		//		|			|
-    arena.gc(token.reborrow());						// <==	- '1, '2	|
-    let third = arena.add(								//					|
-    	rand::random(), token.into_shared()				// <==				x
+    arena.gc(token.reborrow());							// <==	- '1, '2	|
+    let third = arena.get(								//					|
+    	token.into_shared()								// <==				x
     );													// <==	  '3 == 'a	|
     third												//					|
 }														// <==				-
@@ -95,10 +95,9 @@ impl SharedToken<'_> {
 struct Arena(Vec<u32>);
 
 impl Arena {
-    /// Add a value to arena and return its reference as ArenaRef, bound to a
-    /// SharedToken's lifetime.
-    fn add<'a>(&mut self, value: u32, _: SharedToken<'a>) -> ArenaRef<'a> {
-        self.0.push(value);
+    /// Get an ArenaRef, bound to a SharedToken's lifetime.
+    fn get<'a>(&mut self, _: SharedToken<'a>) -> ArenaRef<'a> {
+        self.0.push(rand::random());
         ArenaRef(self.0.len() - 1, PhantomData)
     }
 

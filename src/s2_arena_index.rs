@@ -5,9 +5,9 @@
 fn act(
 	arena: &mut Arena
 ) {
-    let first = arena.add(rand::random());				// ==>	+ '1
+    let first = arena.get();							// ==>	+ '1
     println!("First value: {}", arena[first]);			//		|
-    let second = arena.add(rand::random());				// ==>	+ '2
+    let second = arena.get();							// ==>	+ '2
     println!("First value: {}", arena[first]);			//		|
     println!("Second value: {}", arena[second]);		//		|
     arena.gc();											// <==	- '1, '2
@@ -35,10 +35,10 @@ fn act(
 
 
 impl Arena {
-	/// Add a value to Arena and return a reference to it.
-	fn add(&mut self, value: u32) -> usize {
+	/// Get a value reference from Arena.
+	fn get(&mut self) -> usize {
 		let idx = self.0.len();
-	    self.0.push(value);
+	    self.0.push(rand::random());
 	    idx
 	}
 
